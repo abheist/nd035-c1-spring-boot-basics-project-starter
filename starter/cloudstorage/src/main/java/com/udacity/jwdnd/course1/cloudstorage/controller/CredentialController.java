@@ -21,29 +21,31 @@ public class CredentialController {
     }
 
     @PostMapping
-    public String addCredential(@ModelAttribute Credential credential, Authentication authentication, RedirectAttributes redirectAttributes) {
+    public String addCredential(@ModelAttribute Credential credential, Authentication authentication) {
+
         int userId = userService.getUser(authentication.getName()).getUserId();
         credential.setUserId(userId);
         credentialService.addCredential(credential);
 
-        return "redirect:/credential";
+        return "redirect:/home/result";
     }
 
     @PutMapping
-    public Credential updateCredential(@ModelAttribute Credential credential, Authentication authentication) {
+    public String updateCredential(@ModelAttribute Credential credential, Authentication authentication) {
         int userId = userService.getUser(authentication.getName()).getUserId();
         credential.setUserId(userId);
         credentialService.updateCredential(credential);
 
-        return credential;
+        return "redirect:/home/result";
     }
+
 
     @DeleteMapping
     public String deleteCredential(@ModelAttribute("credentialId") Integer credentialId, RedirectAttributes redirectAttributes, Authentication authentication) {
         int userId = userService.getUser(authentication.getName()).getUserId();
         credentialService.deleteCredential(credentialId, userId);
 
-        return "redirect:/credential";
+        return "redirect:/home/result";
     }
 
 }

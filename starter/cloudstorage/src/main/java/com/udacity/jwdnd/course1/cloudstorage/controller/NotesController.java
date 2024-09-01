@@ -7,7 +7,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -27,19 +26,14 @@ public class NotesController {
 
         int userId = userService.getUser(authentication.getName()).getUserId();
         note.setUserId(userId);
-        noteService.addNote(note);
 
-        return "redirect:/note";
-    }
+        if (note.getNoteId() == null) {
+            noteService.addNote(note);
+        } else {
+            noteService.updateNote(note);
+        }
 
-    @PutMapping
-    public String edit(@ModelAttribute Note note, Authentication authentication) {
-
-        int userId = userService.getUser(authentication.getName()).getUserId();
-        note.setUserId(userId);
-        noteService.updateNote(note);
-
-        return "redirect:/note";
+        return "redirect:/home/result";
     }
 
     @PostMapping("delete")
@@ -48,7 +42,7 @@ public class NotesController {
         int userId = userService.getUser(authentication.getName()).getUserId();
         noteService.deleteNoteById(noteId, userId);
 
-        return "redirect:/note";
+        return "redirect:/home/result";
     }
 
 }

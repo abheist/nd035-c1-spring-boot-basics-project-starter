@@ -17,7 +17,7 @@ public interface CredentialMapper {
     @Select("SELECT COUNT(*) as count FROM CREDENTIALS WHERE credentialid = #{credentialId} and userid = #{userId}")
     long checkCredential(int credentialId, int userId);
 
-    @Insert("INSERT INTO CRENDENTIALS (url, username, key, password, userid) VALUES (#{url}, #{username}, #{key}, " +
+    @Insert("INSERT INTO CREDENTIALS (url, username, `key`, password, userid) VALUES (#{url}, #{username}, #{key}, " +
             "#{password}, #{userId})")
     @Options(useGeneratedKeys = true, keyColumn = "credentialid", keyProperty = "credentialId")
     int createCredential(Credential credential);
