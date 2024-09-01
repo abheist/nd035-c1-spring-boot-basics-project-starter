@@ -18,8 +18,7 @@ public class CredentialService {
         this.credentialMapper = credentialMapper;
     }
 
-    public void addCredential(String url, String username, String key, String password, int userId) {
-        Credential credential = new Credential(0, url, username, key, password, userId);
+    public void addCredential(Credential credential) {
         credentialMapper.createCredential(credential);
     }
 
@@ -35,9 +34,8 @@ public class CredentialService {
         credentialMapper.deleteCredential(credentialId, userId);
     }
 
-    public void updateCredential(String url, String username, String key, String password, int credentialId,
-                                 int userId) {
-        credentialMapper.editCredential(credentialId, url, username, key, password, userId);
+    public void updateCredential(Credential credential) {
+        credentialMapper.editCredential(credential);
     }
 
 }
