@@ -53,7 +53,7 @@ public class FileController {
         }
         model.addFlashAttribute("resultError", uploadErrorMessage);
 
-        return "redirect:/file";
+        return "redirect:/home/result";
     }
 
     @GetMapping
@@ -76,12 +76,12 @@ public class FileController {
         return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
     }
 
-    @DeleteMapping
+    @PostMapping("delete")
     public String delete(@ModelAttribute("fileId") int fileId, Authentication authentication) {
         int userId = userService.getUser(authentication.getName()).getUserId();
         fileService.deleteFileById(fileId, userId);
 
-        return "redirect:/file";
+        return "redirect:/home/result";
     }
 
 }
