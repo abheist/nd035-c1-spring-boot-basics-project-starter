@@ -79,9 +79,6 @@ public class CredentialTests extends CloudStorageApplicationTests {
         homePage.logout();
     }
 
-    /**
-     * Test that deletes an existing set of credentials and verifies that the credentials are no longer displayed.
-     */
     @Test
     public void testDeletion() {
         HomePage homePage = signUpAndLogin();

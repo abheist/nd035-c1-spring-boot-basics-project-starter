@@ -8,14 +8,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-/**
- * Tests for Note Creation, Viewing, Editing, and Deletion.
- */
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class NoteTests extends CloudStorageApplicationTests {
-    /**
-     * Test that edits an existing note and verifies that the changes are displayed.
-     */
+
     @Test
     public void testDelete() {
         String noteTitle = "My Note";
@@ -35,9 +31,6 @@ class NoteTests extends CloudStorageApplicationTests {
         resultPage.clickOk();
     }
 
-    /**
-     * Test that creates a note, and verifies it is displayed.
-     */
     @Test
     public void testCreateAndDisplay() {
         String noteTitle = "My Note";
@@ -52,10 +45,7 @@ class NoteTests extends CloudStorageApplicationTests {
         deleteNote(homePage);
         homePage.logout();
     }
-
-    /**
-     * Test that edits an existing note and verifies that the changes are displayed.
-     */
+    
     @Test
     public void testModify() {
         String noteTitle = "My Note";

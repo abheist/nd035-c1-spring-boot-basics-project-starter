@@ -18,7 +18,7 @@ public class UserTests extends CloudStorageApplicationTests {
     }
 
 
-     /**
+    /**
      * PLEASE DO NOT DELETE THIS TEST. You may modify this test to work with the
      * rest of your code.
      * This test is provided by Udacity to perform some basic sanity testing of
