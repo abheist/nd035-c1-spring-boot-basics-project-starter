@@ -14,13 +14,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class HomePage {
     private final WebDriverWait wait;
     private final JavascriptExecutor js;
-    @FindBy(id = "btnLogout")
+    @FindBy(id = "btn-logout")
     private WebElement logoutButton;
     @FindBy(id = "fileUpload")
     private WebElement fileUpload;
-    @FindBy(id = "btnAddNewNote")
+    @FindBy(id = "btn-add-new-note")
     private WebElement btnAddNewNote;
-    @FindBy(id = "btnAddNewCredential")
+    @FindBy(id = "btn-add-new-credential")
     private WebElement btnAddNewCredential;
     @FindBy(id = "note-title")
     private WebElement txtNoteTitle;
@@ -30,21 +30,21 @@ public class HomePage {
     private WebElement navCredentialsTab;
     @FindBy(id = "note-description")
     private WebElement txtNoteDescription;
-    @FindBy(id = "btnNoteSaveChanges")
+    @FindBy(id = "btn-note-save-changes")
     private WebElement btnNoteSaveChanges;
-    @FindBy(id = "tableNoteTitle")
+    @FindBy(id = "note-table-title")
     private WebElement tableNoteTitle;
-    @FindBy(id = "tableNoteDescription")
+    @FindBy(id = "note-table-description")
     private WebElement tableNoteDescription;
-    @FindBy(id = "btnEditNote")
+    @FindBy(id = "edit-note-button")
     private WebElement btnEditNote;
-    @FindBy(id = "btnEditCredential")
+    @FindBy(id = "edit-credential-button")
     private WebElement btnEditCredential;
     @FindBy(id = "note-description")
     private WebElement txtModifyNoteDescription;
-    @FindBy(id = "ancDeleteNote")
+    @FindBy(id = "delete-note-link")
     private WebElement ancDeleteNote;
-    @FindBy(id = "aDeleteCredential")
+    @FindBy(id = "delete-credential-link")
     private WebElement aDeleteCredential;
     @FindBy(id = "credential-url")
     private WebElement txtCredentialUrl;
@@ -52,13 +52,13 @@ public class HomePage {
     private WebElement txtCredentialUsername;
     @FindBy(id = "credential-password")
     private WebElement txtCredentialPassword;
-    @FindBy(id = "btnCredentialSaveChanges")
+    @FindBy(id = "credential-save-changes-button")
     private WebElement btnCredentialSaveChanges;
-    @FindBy(id = "tblCredentialUrl")
+    @FindBy(id = "credential-table-url")
     private WebElement tblCredentialUrl;
-    @FindBy(id = "tblCredentialUsername")
+    @FindBy(id = "credential-table-username")
     private WebElement tblCredentialUsername;
-    @FindBy(id = "tblCredentialPassword")
+    @FindBy(id = "credential-table-password")
     private WebElement tblCredentialPassword;
 
     public HomePage(WebDriver driver) {
@@ -146,13 +146,13 @@ public class HomePage {
     }
 
     public boolean noNotes(WebDriver driver) {
-        return !isElementPresent(By.id("tableNoteTitle"), driver) && !isElementPresent(By.id("tableNoteDescription"), driver);
+        return !isElementPresent(By.id("note-table-title"), driver) && !isElementPresent(By.id("note-table-description"), driver);
     }
 
     public boolean noCredentials(WebDriver driver) {
-        return !isElementPresent(By.id("tblCredentialUrl"), driver) &&
-                !isElementPresent(By.id("tblCredentialUsername"), driver) &&
-                !isElementPresent(By.id("tblCredentialPassword"), driver);
+        return !isElementPresent(By.id("credential-table-url"), driver) &&
+                !isElementPresent(By.id("credential-table-username"), driver) &&
+                !isElementPresent(By.id("credential-table-password"), driver);
     }
 
     public boolean isElementPresent(By locatorKey, WebDriver driver) {
