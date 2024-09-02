@@ -8,7 +8,7 @@ public class Credential {
     private String password;
     private Integer userId;
 
-    public Credential(Integer credentialId, String url, String username, String key, String password, Integer userId) {
+    public Credential(String url, String username, String key) {
         this.credentialId = credentialId;
         this.url = url;
         this.username = username;
