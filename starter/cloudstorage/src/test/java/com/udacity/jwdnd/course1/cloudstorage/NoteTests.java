@@ -13,69 +13,79 @@ import org.springframework.boot.test.context.SpringBootTest;
 class NoteTests extends CloudStorageApplicationTests {
 
     @Test
-    public void testDelete() {
-        String noteTitle = "My Note";
-        String noteDescription = "This is my note.";
-        HomePage homePage = signUpAndLogin();
-        createNote(noteTitle, noteDescription, homePage);
-        homePage.navToNotesTab();
-        homePage = new HomePage(driver);
-        Assertions.assertFalse(homePage.noNotes(driver));
-        deleteNote(homePage);
-        Assertions.assertTrue(homePage.noNotes(driver));
-    }
+    public void testNoteCreationAndDisplay() {
+        String noteTitle = "My First Uda Note";
+        String noteDescription = "This is first udacity note for assignment";
 
-    private void deleteNote(HomePage homePage) {
-        homePage.deleteNote();
-        ResultPage resultPage = new ResultPage(driver);
-        resultPage.clickOk();
+        HomePage homePageInstance1 = signUpAndLogin();
+        try {
+            createNote(noteTitle, noteDescription, homePageInstance1);
+        } catch (Exception e) {
+            Assertions.fail("Failed to create note: " + e.getMessage());
+        }
+
+        homePageInstance1.navigateToNotesTab();
+        homePageInstance1 = new HomePage(driver);
+
+        Note noteInstance = homePageInstance1.getFirstNote();
+
+        Assertions.assertEquals(noteTitle, noteInstance.getNoteTitle());
+        Assertions.assertEquals(noteDescription, noteInstance.getNoteDescription());
+
+        deleteNote(homePageInstance1);
+
+        homePageInstance1.logout();
     }
 
     @Test
-    public void testCreateAndDisplay() {
-        String noteTitle = "My Note";
-        String noteDescription = "This is my note.";
-        HomePage homePage = signUpAndLogin();
-        createNote(noteTitle, noteDescription, homePage);
-        homePage.navToNotesTab();
-        homePage = new HomePage(driver);
-        Note note = homePage.getFirstNote();
-        Assertions.assertEquals(noteTitle, note.getNoteTitle());
-        Assertions.assertEquals(noteDescription, note.getNoteDescription());
-        deleteNote(homePage);
-        homePage.logout();
-    }
-    
-    @Test
-    public void testModify() {
-        String noteTitle = "My Note";
-        String noteDescription = "This is my note.";
-        HomePage homePage = signUpAndLogin();
-        createNote(noteTitle, noteDescription, homePage);
-        homePage.navToNotesTab();
-        homePage = new HomePage(driver);
-        homePage.editNote();
-        String modifiedNoteTitle = "My Modified Note";
-        homePage.modifyNoteTitle(modifiedNoteTitle);
-        String modifiedNoteDescription = "This is my modified note.";
-        homePage.modifyNoteDescription(modifiedNoteDescription);
-        homePage.saveNoteChanges();
-        ResultPage resultPage = new ResultPage(driver);
-        resultPage.clickOk();
-        homePage.navToNotesTab();
-        Note note = homePage.getFirstNote();
+    public void testNoteUpdate() {
+
+        String noteTitle = "My second Uda Note";
+        String noteDescription = "This is second udacity note for assignment";
+
+        HomePage homePageInstance2 = signUpAndLogin();
+        createNote(noteTitle, noteDescription, homePageInstance2);
+
+        homePageInstance2.navigateToNotesTab();
+        homePageInstance2 = new HomePage(driver);
+
+        homePageInstance2.editNote();
+        String modifiedNoteTitle = "Modified Udacity";
+        homePageInstance2.modifyNoteTitle(modifiedNoteTitle);
+
+        String modifiedNoteDescription = "second modified udacity note for assignment 1st.";
+        homePageInstance2.modifyNoteDescription(modifiedNoteDescription);
+        homePageInstance2.saveNoteChanges();
+
+        ResultPage resultPageInstance = new ResultPage(driver);
+        resultPageInstance.clickOk();
+
+        homePageInstance2.navigateToNotesTab();
+        Note note = homePageInstance2.getFirstNote();
+
         Assertions.assertEquals(modifiedNoteTitle, note.getNoteTitle());
         Assertions.assertEquals(modifiedNoteDescription, note.getNoteDescription());
+
+        deleteNote(homePageInstance2);
+        homePageInstance2.logout();
     }
 
-    private void createNote(String noteTitle, String noteDescription, HomePage homePage) {
-        homePage.navToNotesTab();
-        homePage.addNewNote();
-        homePage.setNoteTitle(noteTitle);
-        homePage.setNoteDescription(noteDescription);
-        homePage.saveNoteChanges();
-        ResultPage resultPage = new ResultPage(driver);
-        resultPage.clickOk();
-        homePage.navToNotesTab();
+    @Test
+    public void testNoteDeletion() {
+        String noteTitle = "My third Uda Note";
+        String noteDescription = "third udacity note for assignment.";
+
+        HomePage homePageInstance3 = signUpAndLogin();
+        createNote(noteTitle, noteDescription, homePageInstance3);
+
+        homePageInstance3.navigateToNotesTab();
+        homePageInstance3 = new HomePage(driver);
+
+        Assertions.assertFalse(homePageInstance3.noNotes(driver));
+
+        deleteNote(homePageInstance3);
+
+        Assertions.assertTrue(homePageInstance3.noNotes(driver));
+        homePageInstance3.logout();
     }
 }

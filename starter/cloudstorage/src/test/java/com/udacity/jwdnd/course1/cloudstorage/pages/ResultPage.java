@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 public class ResultPage {
 
     private final JavascriptExecutor js;
-    @FindBy(id = "aResultSuccess")
+    @FindBy(id = "result-success-link")
     private WebElement resultSuccess;
 
     public ResultPage(WebDriver driver) {
@@ -18,7 +18,7 @@ public class ResultPage {
     }
 
     public void clickOk() {
-        js.executeScript("arguments[0].click()", resultSuccess);
+        js.executeScript("arguments[0].click();", resultSuccess);
     }
 
 }

@@ -17,8 +17,7 @@ public interface NoteMapper {
     @Select("SELECT COUNT(*) as count FROM NOTES WHERE noteid = #{noteId} and userid = #{userId}")
     long checkNote(int noteId, int userId);
 
-    @Insert("INSERT INTO NOTES (notetitle, notedescription, userid) VALUES (#{noteTitle}, #{noteDescription}, " +
-            "#{userId})")
+    @Insert("INSERT INTO NOTES (notetitle, notedescription, userid) VALUES (#{noteTitle}, #{noteDescription},#{userId})")
     @Options(useGeneratedKeys = true, keyColumn = "noteid", keyProperty = "noteId")
     int createNote(Note note);
 

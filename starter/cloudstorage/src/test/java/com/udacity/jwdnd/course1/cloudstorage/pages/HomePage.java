@@ -14,52 +14,75 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class HomePage {
     private final WebDriverWait wait;
     private final JavascriptExecutor js;
+
     @FindBy(id = "btn-logout")
     private WebElement logoutButton;
+
     @FindBy(id = "fileUpload")
     private WebElement fileUpload;
+
     @FindBy(id = "btn-add-new-note")
-    private WebElement btnAddNewNote;
+    private WebElement addNewNoteButton;
+
     @FindBy(id = "btn-add-new-credential")
-    private WebElement btnAddNewCredential;
+    private WebElement addNewCredentialButton;
+
     @FindBy(id = "note-title")
-    private WebElement txtNoteTitle;
+    private WebElement noteTitleInput;
+
     @FindBy(id = "nav-notes-tab")
-    private WebElement navNotesTab;
+    private WebElement noteTabNavigation;
+
     @FindBy(id = "nav-credentials-tab")
-    private WebElement navCredentialsTab;
+    private WebElement credentialTabNavigation;
+
     @FindBy(id = "note-description")
-    private WebElement txtNoteDescription;
+    private WebElement noteDescriptionInput;
+
     @FindBy(id = "btn-note-save-changes")
-    private WebElement btnNoteSaveChanges;
+    private WebElement noteSaveChangesButton;
+
     @FindBy(id = "note-table-title")
-    private WebElement tableNoteTitle;
+    private WebElement noteTitleTable;
+
     @FindBy(id = "note-table-description")
-    private WebElement tableNoteDescription;
+    private WebElement noteDescriptionTable;
+
     @FindBy(id = "edit-note-button")
-    private WebElement btnEditNote;
+    private WebElement editNoteButton;
+
     @FindBy(id = "edit-credential-button")
-    private WebElement btnEditCredential;
+    private WebElement editCredentialButton;
+
     @FindBy(id = "note-description")
-    private WebElement txtModifyNoteDescription;
+    private WebElement updateNoteDescriptionInput;
+
     @FindBy(id = "delete-note-link")
-    private WebElement ancDeleteNote;
+    private WebElement deleteNoteLink;
+
     @FindBy(id = "delete-credential-link")
-    private WebElement aDeleteCredential;
+    private WebElement deleteCredentialLink;
+
     @FindBy(id = "credential-url")
-    private WebElement txtCredentialUrl;
+    private WebElement credentialURLInput;
+
     @FindBy(id = "credential-username")
-    private WebElement txtCredentialUsername;
+    private WebElement credentialUsernameInput;
+
     @FindBy(id = "credential-password")
-    private WebElement txtCredentialPassword;
+    private WebElement credentialPasswordInput;
+
     @FindBy(id = "credential-save-changes-button")
-    private WebElement btnCredentialSaveChanges;
+    private WebElement credentialSaveChangesButton;
+
     @FindBy(id = "credential-table-url")
-    private WebElement tblCredentialUrl;
+    private WebElement credentialTableURL;
+
     @FindBy(id = "credential-table-username")
-    private WebElement tblCredentialUsername;
+    private WebElement credentialUsernameTable;
+
     @FindBy(id = "credential-table-password")
-    private WebElement tblCredentialPassword;
+    private WebElement credentialPasswordTable;
 
     public HomePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -72,19 +95,19 @@ public class HomePage {
     }
 
     public void editNote() {
-        js.executeScript("arguments[0].click();", btnEditNote);
+        js.executeScript("arguments[0].click();", editNoteButton);
     }
 
     public void editCredential() {
-        js.executeScript("arguments[0].click();", btnEditCredential);
+        js.executeScript("arguments[0].click();", editCredentialButton);
     }
 
     public void deleteNote() {
-        js.executeScript("arguments[0].click();", ancDeleteNote);
+        js.executeScript("arguments[0].click();", deleteNoteLink);
     }
 
     public void deleteCredential() {
-        js.executeScript("arguments[0].click();", aDeleteCredential);
+        js.executeScript("arguments[0].click();", deleteCredentialLink);
     }
 
     public void uploadFile() {
@@ -92,57 +115,57 @@ public class HomePage {
     }
 
     public void addNewNote() {
-        js.executeScript("arguments[0].click();", btnAddNewNote);
+        js.executeScript("arguments[0].click();", addNewNoteButton);
     }
 
-    public void addNewCredential() {
-        js.executeScript("arguments[0].click();", btnAddNewCredential);
+    public void addNewCredentialValue() {
+        js.executeScript("arguments[0].click();", addNewCredentialButton);
     }
 
-    public void setNoteTitle(String noteTitle) {
-        js.executeScript("arguments[0].value='" + noteTitle + "';", txtNoteTitle);
+    public void setNoteTitleValue(String noteTitle) {
+        js.executeScript("arguments[0].value='" + noteTitle + "';", noteTitleInput);
     }
 
-    public void setCredentialUrl(String url) {
-        js.executeScript("arguments[0].value='" + url + "';", txtCredentialUrl);
+    public void setCredentialUrlValue(String url) {
+        js.executeScript("arguments[0].value='" + url + "';", credentialURLInput);
     }
 
-    public void setCredentialUsername(String username) {
-        js.executeScript("arguments[0].value='" + username + "';", txtCredentialUsername);
+    public void setCredentialUsernameValue(String username) {
+        js.executeScript("arguments[0].value='" + username + "';", credentialUsernameInput);
     }
 
-    public void setCredentialPassword(String password) {
-        js.executeScript("arguments[0].value='" + password + "';", txtCredentialPassword);
+    public void setCredentialPasswordValue(String password) {
+        js.executeScript("arguments[0].value='" + password + "';", credentialPasswordInput);
     }
 
     public void modifyNoteTitle(String newNoteTitle) {
-        wait.until(ExpectedConditions.elementToBeClickable(txtNoteTitle)).clear();
-        wait.until(ExpectedConditions.elementToBeClickable(txtNoteTitle)).sendKeys(newNoteTitle);
+        wait.until(ExpectedConditions.elementToBeClickable(noteTitleInput)).clear();
+        wait.until(ExpectedConditions.elementToBeClickable(noteTitleInput)).sendKeys(newNoteTitle);
     }
 
     public void modifyNoteDescription(String newNoteDescription) {
-        wait.until(ExpectedConditions.elementToBeClickable(txtModifyNoteDescription)).clear();
-        wait.until(ExpectedConditions.elementToBeClickable(txtModifyNoteDescription)).sendKeys(newNoteDescription);
+        wait.until(ExpectedConditions.elementToBeClickable(updateNoteDescriptionInput)).clear();
+        wait.until(ExpectedConditions.elementToBeClickable(updateNoteDescriptionInput)).sendKeys(newNoteDescription);
     }
 
-    public void navToNotesTab() {
-        js.executeScript("arguments[0].click();", navNotesTab);
+    public void navigateToNotesTab() {
+        js.executeScript("arguments[0].click();", noteTabNavigation);
     }
 
-    public void navToCredentialsTab() {
-        js.executeScript("arguments[0].click();", navCredentialsTab);
+    public void navigateToCredentialTab() {
+        js.executeScript("arguments[0].click();", credentialTabNavigation);
     }
 
-    public void setNoteDescription(String noteDescription) {
-        js.executeScript("arguments[0].value='" + noteDescription + "';", txtNoteDescription);
+    public void setNoteDescriptionValue(String noteDescription) {
+        js.executeScript("arguments[0].value='" + noteDescription + "';", noteDescriptionInput);
     }
 
     public void saveNoteChanges() {
-        js.executeScript("arguments[0].click();", btnNoteSaveChanges);
+        js.executeScript("arguments[0].click();", noteSaveChangesButton);
     }
 
     public void saveCredentialChanges() {
-        js.executeScript("arguments[0].click();", btnCredentialSaveChanges);
+        js.executeScript("arguments[0].click();", credentialSaveChangesButton);
     }
 
     public boolean noNotes(WebDriver driver) {
@@ -166,16 +189,16 @@ public class HomePage {
     }
 
     public Note getFirstNote() {
-        String title = wait.until(ExpectedConditions.elementToBeClickable(tableNoteTitle)).getText();
-        String description = tableNoteDescription.getText();
+        String title = wait.until(ExpectedConditions.elementToBeClickable(noteTitleTable)).getText();
+        String description = noteDescriptionTable.getText();
 
         return new Note(title, description);
     }
 
     public Credential getFirstCredential() {
-        String url = wait.until(ExpectedConditions.elementToBeClickable(tblCredentialUrl)).getText();
-        String username = tblCredentialUsername.getText();
-        String password = tblCredentialPassword.getText();
+        String url = wait.until(ExpectedConditions.elementToBeClickable(credentialTableURL)).getText();
+        String username = credentialUsernameTable.getText();
+        String password = credentialPasswordTable.getText();
 
         return new Credential(url, username, password);
     }

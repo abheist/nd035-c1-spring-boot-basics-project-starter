@@ -1,7 +1,9 @@
 package com.udacity.jwdnd.course1.cloudstorage;
 
+import com.udacity.jwdnd.course1.cloudstorage.model.Credential;
 import com.udacity.jwdnd.course1.cloudstorage.pages.HomePage;
 import com.udacity.jwdnd.course1.cloudstorage.pages.LoginPage;
+import com.udacity.jwdnd.course1.cloudstorage.pages.ResultPage;
 import com.udacity.jwdnd.course1.cloudstorage.pages.SignupPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
@@ -19,6 +21,15 @@ import org.springframework.boot.web.server.LocalServerPort;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CloudStorageApplicationTests {
+
+    public static final String ABHEIST_URL = "http://abheist.com/";
+    public static final String ABHI_USERNAME = "abheist";
+    public static final String ABHI_PASSWORD = "abheist_password";
+
+    public static final String STAR_URL = "http://starwars.com/";
+    public static final String STAR_USERNAME = "star";
+    public static final String STAR_PASSWORD = "wars";
+
 
     @LocalServerPort
     protected int port;
@@ -40,6 +51,54 @@ class CloudStorageApplicationTests {
         if (this.driver != null) {
             driver.quit();
         }
+    }
+
+    protected void createNote(String noteTitle, String noteDescription, HomePage homePageInstance) {
+        homePageInstance.navigateToNotesTab();
+        homePageInstance.addNewNote();
+        homePageInstance.setNoteTitleValue(noteTitle);
+        homePageInstance.setNoteDescriptionValue(noteDescription);
+        homePageInstance.saveNoteChanges();
+
+        ResultPage resultPageInstance = new ResultPage(driver);
+        resultPageInstance.clickOk();
+
+        homePageInstance.navigateToNotesTab();
+    }
+
+
+    protected void createCredentialAndVerify(HomePage homePageInstance) {
+        createCredentialInstance(ABHEIST_URL, ABHI_USERNAME, ABHI_PASSWORD, homePageInstance);
+        homePageInstance.navigateToCredentialTab();
+        Credential credentialInstance = homePageInstance.getFirstCredential();
+
+        Assertions.assertEquals(ABHEIST_URL, credentialInstance.getUrl());
+        Assertions.assertEquals(ABHI_USERNAME, credentialInstance.getUsername());
+        Assertions.assertNotEquals(ABHI_PASSWORD, credentialInstance.getPassword());
+    }
+
+    protected void createCredentialInstance(String url, String username, String password, HomePage homePageInstance) {
+        homePageInstance.navigateToCredentialTab();
+        homePageInstance.addNewCredentialValue();
+        setCredentialFieldValues(url, username, password, homePageInstance);
+        homePageInstance.saveCredentialChanges();
+
+        ResultPage resultPageInstance = new ResultPage(driver);
+        resultPageInstance.clickOk();
+        homePageInstance.navigateToCredentialTab();
+    }
+
+    protected void setCredentialFieldValues(String url, String username, String password, HomePage homePageInstance) {
+        homePageInstance.setCredentialUrlValue(url);
+        homePageInstance.setCredentialUsernameValue(username);
+        homePageInstance.setCredentialPasswordValue(password);
+    }
+
+    protected void deleteNote(HomePage homePageInstance) {
+        homePageInstance.deleteNote();
+
+        ResultPage resultPageInstance = new ResultPage(driver);
+        resultPageInstance.clickOk();
     }
 
     /**
@@ -114,8 +173,7 @@ class CloudStorageApplicationTests {
         webDriverWait.until(ExpectedConditions.titleContains("Home"));
 
     }
-
-
+    
     public HomePage signUpAndLogin() {
         String firstName = "Abhishek";
         String lastName = "Singh";

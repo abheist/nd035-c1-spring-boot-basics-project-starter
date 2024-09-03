@@ -98,7 +98,9 @@
                                 </form>
                             </td>
                             <th scope="row" th:text="${note.noteTitle}" id="note-table-title">Example Note Title</th>
-                            <td th:text="${note.noteDescription}" id="note-table-description">Example Note Description</td>
+                            <td th:text="${note.noteDescription}" id="note-table-description">
+                                Example Note Description
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -133,8 +135,8 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-primary" id="btn-note-save-changes"
-                                        onclick="$('#noteSubmit').click();">Save
-                                    changes
+                                        onclick="$('#noteSubmit').click();">
+                                    Save changes
                                 </button>
                             </div>
                         </div>
@@ -166,12 +168,19 @@
                                 </button>
                                 <form action="#" method="POST" th:action="@{/credential/delete/}">
                                     <input type="hidden" name="credentialId" th:value="${credential.credentialId}">
-                                    <button class="btn btn-danger" type="submit" id="delete-credential-link">Delete</button>
+                                    <button class="btn btn-danger" type="submit" id="delete-credential-link">Delete
+                                    </button>
                                 </form>
                             </td>
-                            <th scope="row" th:text="${credential.url}" id="credential-table-url">Example Credential URL</th>
-                            <td th:text="${credential.username}" id="credential-table-username">Example Credential Username</td>
-                            <td th:text="${credential.password}" id="credential-table-password">Example Credential Password</td>
+                            <th scope="row" th:text="${credential.url}" id="credential-table-url">Example Credential
+                                URL
+                            </th>
+                            <td th:text="${credential.username}" id="credential-table-username">Example Credential
+                                Username
+                            </td>
+                            <td th:text="${credential.password}" id="credential-table-password">Example Credential
+                                Password
+                            </td>
                         </tr>
                         </tbody>
                     </table>
