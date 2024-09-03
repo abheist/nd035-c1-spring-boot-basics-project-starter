@@ -162,8 +162,15 @@
                         <tbody>
                         <tr th:each="credential: ${credentials}">
                             <td>
-                                <button type="button" class="btn btn-success" id="edit-credential-button"
-                                        th:attr="onclick=|showCredentialModal('${credential.credentialId}', '${credential.url}', '${credential.username}', '${credential.password}')|">
+                                <button class="btn btn-success"
+                                        id="edit-credential-button"
+                                        th:data-decryptedPassword="${encryptionService.decryptValue(credential.password, credential.key)}"
+                                        th:data-id="${credential.getCredentialId()}"
+                                        th:data-password="${credential.password}"
+                                        th:data-url="${credential.url}"
+                                        th:data-username="${credential.username}"
+                                        th:onclick="showCredentialModal(this.getAttribute('data-id'), this.getAttribute('data-url'), this.getAttribute('data-username'), this.getAttribute('data-decryptedPassword'))"
+                                        type="button">
                                     Edit
                                 </button>
                                 <form action="#" method="POST" th:action="@{/credential/delete/}">
