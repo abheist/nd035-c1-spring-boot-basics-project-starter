@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.URI;
+import java.nio.file.FileAlreadyExistsException;
 
 @Controller
 @RequestMapping("file")
@@ -44,7 +45,16 @@ public class FileController {
             if (file.getSize() / 1024 / 1024 > 5) {
                 throw new NoRowsAffectedException("File exceeded limit 5 MB");
             }
+
             int userId = userService.getUser(authentication.getName()).getUserId();
+
+            String fileName = file.getOriginalFilename();
+            File existingFile = fileService.getFileByName(fileName, userId);
+
+            if (existingFile != null) {
+                throw new FileAlreadyExistsException("File already exists");
+            }
+
             File fileModel = new File(null, file.getOriginalFilename(), file.getContentType(),
                     String.format("%d KB", file.getSize() / 1024), userId, file.getInputStream().readAllBytes());
             fileService.addFile(fileModel, userId);

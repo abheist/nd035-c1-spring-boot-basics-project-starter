@@ -33,6 +33,10 @@ public class FileService {
         return this.fileMapper.getFileById(fileId, userId);
     }
 
+    public File getFileByName(String fileName, int userId) {
+        return this.fileMapper.getFileByName(fileName, userId);
+    }
+
     public void deleteFileById(int fileId, int userId) {
         this.fileMapper.deleteFile(fileId, userId);
     }
